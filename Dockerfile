@@ -1,9 +1,22 @@
-FROM python:3.8-slim-buster
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
+
+# Set the working directory
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+# Install FFmpeg dependencies
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY . .
+# Copy the current directory contents into the container
+COPY . /app
 
-CMD python3 main.py
+# Install any necessary dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose port 5000 (or whatever your bot's port is)
+EXPOSE 5000
+
+# Run your bot
+CMD ["python", "main.py"]
