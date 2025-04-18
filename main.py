@@ -1,5 +1,8 @@
-from bot import Bot
-from plugins import auto_post  # Make sure this is included
+from pyrogram import Client
+from config import API_ID, API_HASH, BOT_TOKEN
+from plugins.auto_post import process_queue
 
+app = Client("bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN, plugins={"root": "plugins"})
 
-Bot().run()
+if __name__ == "__main__":
+    app.run(process_queue(app))
