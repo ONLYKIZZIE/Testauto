@@ -2,7 +2,6 @@ import os
 import logging
 from pyrogram import Client
 from pyrogram.types import InputMediaPhoto
-from helpers.download import download_media
 from helpers.thumbnail import generate_thumbnail
 from config import POST_CHANNEL
 
