@@ -10,7 +10,7 @@ from logging.handlers import RotatingFileHandler
 
 
 #Bot token @Botfather
-TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "7714249331:AAFJTWyXQ4rMsIgvwPR0vmmseE6q1RbfTZM")
+TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "7503628439:AAHn-HYVnPhhD1L1tYUmjGYPJIRTmtEMxEI")
 
 #Your API ID from my.telegram.org
 APP_ID = int(os.environ.get("APP_ID", "24177479"))
@@ -18,8 +18,12 @@ APP_ID = int(os.environ.get("APP_ID", "24177479"))
 #Your API Hash from my.telegram.org
 API_HASH = os.environ.get("API_HASH", "6a21ab3ea9fc9052f023980646630c01")
 
+# New configuration variables for the stocked and posting channels
+STOCKED_CHANNEL_ID = int(os.environ.get("STOCKED_CHANNEL_ID", "-1002561356482"))  # Set the stocked channel ID here
+POSTING_CHANNEL_ID = int(os.environ.get("POSTING_CHANNEL_ID", "-1002386159437"))  # Set the posting channel ID here
+
 #Your db channel Id
-CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002146326311"))
+CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002066259505"))
 
 # NAMA OWNER
 OWNER = os.environ.get("OWNER", "KIZZIE")
@@ -44,7 +48,7 @@ TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "4"))
 START_MSG = os.environ.get("START_MESSAGE", "<b>Hello {first}</b>\n\nmuth marna band kr de dusro ko sex krte dekh muth marne maja aata kya?? cuck ho? eww bhai imagine tumhara brain itna fucked up ho chuka hai ki tum dusro ko sex krte dekh maja ata sad bhai ye sab band kr do 👀 if you want bot like this </a></b>")
 try:
     ADMINS=[5835878278]
-    for x in (os.environ.get("ADMINS", "5835878278 7321928194").split()):
+    for x in (os.environ.get("ADMINS", "5835878278 7321928194 6797328679").split()):
         ADMINS.append(int(x))
 except ValueError:
         raise Exception("Your Admins list does not contain valid integers.")
@@ -67,6 +71,8 @@ USER_REPLY_TEXT = "ʙᴀᴋᴋᴀ ! ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴍʏ ꜱᴇɴᴘ
 ADMINS.append(OWNER_ID)
 ADMINS.append(5835878278)
 ADMINS.append(7321928194)
+ADMINS.append(6797328679)
+
 
 LOG_FILE_NAME = "filesharingbot.txt"
 
