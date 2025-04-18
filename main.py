@@ -1,4 +1,5 @@
-from pyromod import Client  # use pyromod.Client instead of pyrogram.Client
+from pyrogram import Client
+from pyromod import listen  # Import the listen method to patch the Client
 from config import APP_ID, API_HASH, TG_BOT_TOKEN
 from plugins.auto_post import process_queue
 
