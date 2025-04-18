@@ -2,7 +2,7 @@ import os
 import logging
 from pyrogram import Client
 from pyrogram.types import InputMediaPhoto
-from config import POST_CHANNEL
+from config import POSTING_CHANNEL_ID
 
 # Set up logger
 logger = logging.getLogger(__name__)
