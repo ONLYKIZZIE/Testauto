@@ -19,17 +19,17 @@ APP_ID = int(os.environ.get("APP_ID", "24177479"))
 API_HASH = os.environ.get("API_HASH", "6a21ab3ea9fc9052f023980646630c01")
 
 # New configuration variables for the stocked and posting channels
-STOCKED_CHANNEL_ID = int(os.environ.get("STOCKED_CHANNEL_ID", 0))  # Set the stocked channel ID here
-POSTING_CHANNEL_ID = int(os.environ.get("POSTING_CHANNEL_ID", 0))  # Set the posting channel ID here
+STOCKED_CHANNEL_ID = int(os.environ.get("STOCKED_CHANNEL_ID", "-1002561356482"))  # Set the stocked channel ID here
+POSTING_CHANNEL_ID = int(os.environ.get("POSTING_CHANNEL_ID", "-1002386159437"))  # Set the posting channel ID here
 
 #Your db channel Id
-CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002146326311"))
+CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002032994435"))
 
 # NAMA OWNER
 OWNER = os.environ.get("OWNER", "KIZZIE")
 
 #OWNER ID
-OWNER_ID = int(os.environ.get("OWNER_ID", "5835878278"))
+OWNER_ID = int(os.environ.get("OWNER_ID", "6797328679"))
 
 #Port
 PORT = os.environ.get("PORT", "8018")
@@ -39,8 +39,8 @@ DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://skeleton100005:p7b6jTcUUv
 DB_NAME = os.environ.get("DATABASE_NAME", "skeleton100005")
 
 #force sub channel id, if you want enable force sub
-FORCE_SUB_CHANNEL = int(os.environ.get("FORCE_SUB_CHANNEL", "-1002050627063"))
-FORCE_SUB_CHANNEL2 = int(os.environ.get("FORCE_SUB_CHANNEL2", "-1002393192192"))
+FORCE_SUB_CHANNEL = int(os.environ.get("FORCE_SUB_CHANNEL", "-1002386159437"))
+FORCE_SUB_CHANNEL2 = int(os.environ.get("FORCE_SUB_CHANNEL2", "-1002386159437"))
 
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "4"))
 
