@@ -18,6 +18,10 @@ APP_ID = int(os.environ.get("APP_ID", "24177479"))
 #Your API Hash from my.telegram.org
 API_HASH = os.environ.get("API_HASH", "6a21ab3ea9fc9052f023980646630c01")
 
+# New configuration variables for the stocked and posting channels
+STOCKED_CHANNEL_ID = int(os.environ.get("STOCKED_CHANNEL_ID", 0))  # Set the stocked channel ID here
+POSTING_CHANNEL_ID = int(os.environ.get("POSTING_CHANNEL_ID", 0))  # Set the posting channel ID here
+
 #Your db channel Id
 CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002146326311"))
 
