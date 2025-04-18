@@ -1,8 +1,10 @@
 from pyrogram import Client, filters
-import os
+import asyncio
 import subprocess
+import os
 from config import STOCKED_CHANNEL_ID, POSTING_CHANNEL_ID, BOT_USERNAME
 
+video_queue = asyncio.Queue()
 
 def generate_thumbnail(video_path, output_path="thumb.jpg"):
     subprocess.run([
@@ -10,29 +12,34 @@ def generate_thumbnail(video_path, output_path="thumb.jpg"):
     ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return output_path
 
-
 @Client.on_message(filters.chat(STOCKED_CHANNEL_ID) & (filters.video | filters.document))
-async def handle_stocked_video(client, message):
-    try:
-        # Step 1: Download the video
-        downloaded = await message.download()
-        print("Downloaded:", downloaded)
+async def queue_stocked_video(client, message):
+    await video_queue.put(message)
+    print(f"Queued video {message.id}")
 
-        # Step 2: Generate a thumbnail
-        thumb_path = generate_thumbnail(downloaded)
-        print("Thumbnail generated")
+async def process_queue(client: Client):
+    await client.start()
+    while True:
+        message = await video_queue.get()
+        try:
+            print(f"Processing video {message.id}")
 
-        # Step 3: Forward the message to the bot itself to trigger the link logic
-        forwarded = await message.forward(BOT_USERNAME)
-        print("Forwarded to bot")
+            downloaded = await message.download()
+            thumb_path = generate_thumbnail(downloaded)
 
-        # Step 4: Wait for the bot's reply with the generated link
-        @Client.on_message(filters.reply & filters.private)
-        async def reply_handler(_, reply_msg):
-            if reply_msg.text and "t.me/" in reply_msg.text:
-                video_link = reply_msg.text.strip()
+            # Simulate user sending the video to the bot itself
+            user_msg = await message.copy(chat_id=message.chat.id)
 
-                # Step 5: Post to the target channel
+            # Wait for the bot’s reply to that message
+            video_link = None
+            async for msg in client.get_chat_history(message.chat.id, limit=10):
+                if msg.reply_to_message and msg.reply_to_message.message_id == user_msg.message_id:
+                    if msg.text and "t.me/" in msg.text:
+                        video_link = msg.text.strip()
+                        break
+
+            if video_link:
+                # Send video and thumbnail to the posting channel
                 await client.send_photo(
                     chat_id=POSTING_CHANNEL_ID,
                     photo=thumb_path,
@@ -40,10 +47,10 @@ async def handle_stocked_video(client, message):
                     parse_mode="markdown"
                 )
 
-                # Clean up
-                os.remove(downloaded)
-                os.remove(thumb_path)
-                print("Posted to channel")
+            os.remove(downloaded)
+            os.remove(thumb_path)
 
-    except Exception as e:
-        print("Error:", e)
+        except Exception as e:
+            print(f"Error processing message: {e}")
+
+        await asyncio.sleep(60)  # Wait 1 minute before next post
